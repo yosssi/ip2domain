@@ -21,3 +21,12 @@ run {
         args project.args.split('\\s+')
     }
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ip2domain.Main'
+    }
+    from configurations.compile.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }
+}
